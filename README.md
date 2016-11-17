@@ -1,1 +1,1 @@
-# magento-2-sample-payment-method
+# Magento 2 sample payment method gateway

@@ -1,6 +1,6 @@
 <!--
 /**
- * Copyright © 2015 Magento. All rights reserved.
+ * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -10,8 +10,11 @@
                name="payment[method]"
                class="radio"
                data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
-        <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
+        <label class="label" data-bind="attr: {'for': getCode()}">
+            <span data-bind="text: getTitle()"></span>
+        </label>
     </div>
+
     <div class="payment-method-content">
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
@@ -21,22 +24,33 @@
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
         </div>
-        <div class="checkout-agreements-block">
-            <!-- ko foreach: $parent.getRegion('before-place-order') -->
-            <!-- ko template: getTemplate() --><!-- /ko -->
-            <!--/ko-->
+
+        <div class="field required">
+            <label data-bind="attr: {for: getCode() + '_transaction_result'}" class="label">
+                <span><!-- ko i18n: 'Transaction Result'--><!-- /ko --></span>
+            </label>
+
+            <div class="control">
+                <select name="payment[transaction_result]"
+                        class="select"
+                        data-bind="
+                                  options: getTransactionResults(),
+                                  optionsValue: 'value',
+                                  optionsText: 'transaction_result',
+                                  optionsCaption: $t('Transaction Result'),
+                                  value: transactionResult">
+                </select>
+            </div>
         </div>
+
         <div class="actions-toolbar">
             <div class="primary">
                 <button class="action primary checkout"
                         type="submit"
                         data-bind="
                         click: placeOrder,
-                        attr: {title: $t('Place Order')},
-                        css: {disabled: !isPlaceOrderActionAllowed()},
-                        enable: (getCode() == isChecked())
-                        "
-                        disabled>
+                        attr: {title: $t('Place Order')}
+                        ">
                     <span data-bind="i18n: 'Place Order'"></span>
                 </button>
             </div>

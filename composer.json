@@ -1,5 +1,5 @@
 {
-  "name": "mageplaza/magento-2-payment-method",
+  "name": "wartw/magento-2-payment-method",
   "description": "Sample payment method for Magento 2",
   "require": {
     "php": "~5.5.0|~5.6.0|~7.0.0",
